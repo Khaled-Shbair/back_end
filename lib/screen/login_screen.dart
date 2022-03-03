@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../shared_preferences/sharedPreferencesController.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -36,9 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Login',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.login,
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),
@@ -48,17 +49,17 @@ class _LoginScreenState extends State<LoginScreen> {
         child: ListView(
           children: [
             const SizedBox(height: 20),
-            const Text(
-              'Welcome back...',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.welcome_back,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
-              'Enter Email & PassWord',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.enter_email_password,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 18,
                 fontWeight: FontWeight.w300,
@@ -67,17 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 20),
             TextField(
               controller: _emailEditingController,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email),
-                hintText: 'Email',
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.email),
+                hintText: AppLocalizations.of(context)!.email,
               ),
             ),
             const SizedBox(height: 20),
             TextField(
               controller: _passwordEditingController,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock),
-                hintText: 'PassWord',
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.lock),
+                hintText: AppLocalizations.of(context)!.password,
               ),
             ),
             const SizedBox(height: 20),
@@ -85,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 _performLogin();
               },
-              child: const Text('Login'),
+              child: Text(AppLocalizations.of(context)!.login),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(0, 50),
               ),
