@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/language_provider.dart';
 import '../shared_preferences/sharedPreferencesController.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -43,6 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
             color: Colors.black,
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Provider.of<LanguageProvider>(context, listen: false)
+              .changeLanguage();
+        },
+        child: const Icon(Icons.language),
       ),
       body: Padding(
         padding: const EdgeInsetsDirectional.all(20),

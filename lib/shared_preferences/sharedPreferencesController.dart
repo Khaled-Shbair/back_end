@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum keyPref {
   email,
   loginIn,
+  language,
 }
 
 class SharedPreferencesController {
@@ -20,6 +21,7 @@ class SharedPreferencesController {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
+//////////
   Future<void> save({required String email}) async {
     await _sharedPreferences.setBool(keyPref.loginIn.toString(), true);
     await _sharedPreferences.setString(keyPref.email.toString(), email);
@@ -31,6 +33,15 @@ class SharedPreferencesController {
   String get email =>
       _sharedPreferences.getString(keyPref.email.toString()) ?? '';
 
+//////////
+  Future<bool> changeLanguage(String language) async {
+    return _sharedPreferences.setString(keyPref.language.toString(), language);
+  }
+
+  String get language =>
+      _sharedPreferences.getString(keyPref.language.toString()) ?? 'en';
+
+//////////
   Future<bool> remove({required String key}) async {
     if (_sharedPreferences.containsKey(key)) {
       return await _sharedPreferences.remove(key);

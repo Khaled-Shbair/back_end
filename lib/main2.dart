@@ -9,8 +9,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<String>(
-      create: (context) => text,
+    return ChangeNotifierProvider<_MassageProvider>(
+      create: (context) => _MassageProvider(),
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
@@ -28,7 +28,7 @@ class AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(Provider.of<String>(context));
+    return Text(Provider.of<_MassageProvider>(context).massage);
   }
 }
 
@@ -38,10 +38,12 @@ class ScaffoldBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context)=>'ScaffoldBody',
+      create: (context) => 'ScaffoldBody',
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           AppMassage(),
+          TextFiledProvider(),
         ],
       ),
     );
@@ -53,6 +55,28 @@ class AppMassage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(Provider.of<String>(context));
+    return Text(Provider.of<_MassageProvider>(context).massage);
+  }
+}
+
+class TextFiledProvider extends StatelessWidget {
+  const TextFiledProvider({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onChanged: (String value) {
+        Provider.of(context, listen: false).changeMassage(value);
+      },
+    );
+  }
+}
+
+class _MassageProvider extends ChangeNotifier {
+  String massage = 'Welcome Khaled';
+
+  void changeMassage(String massage) {
+    this.massage = massage;
+    notifyListeners();
   }
 }
